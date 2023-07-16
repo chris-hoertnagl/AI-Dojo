@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  llm:
+    container_name: llm
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    volumes:
+      - ./src:/src
+      - ./cache:/root/.cache
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [ gpu ]
