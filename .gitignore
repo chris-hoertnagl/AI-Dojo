@@ -1,3 +1,6 @@
+# Hugging Face Cache
+/LLM/cache/*
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
