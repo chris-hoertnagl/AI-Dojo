@@ -69,9 +69,9 @@ def get_house_value_reg(lat, long, inc, rooms):
   return output[0]
 
 
-# über pickle pipeline in git ignore, siehe video ml ops, 
-
+# 
 with gzip.open('class_model.pkl.gz', 'wb') as class_model_gzip:
-
     pickle.dump(class_knn, class_model_gzip)
-    
+
+with gzip.open('reg_model.pkl.gz', 'wb') as reg_model_gzip:
+    pickle.dump(reg_rfr, reg_model_gzip)

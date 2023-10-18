@@ -109,7 +109,11 @@ elif selected == "Regression":
         #Change coordinates into address using geopy
         geolocator = Nominatim(user_agent="streamlit_app.py")
         location = geolocator.geocode(address, addressdetails=True)
+            
+        with gzip.open('/workspaces/AI-Dojo/reg_model.pkl.gz', 'rb') as f:
+            reg_rfr = pickle.load(f)
 
+        
         if location:
             latitude = location.latitude
             longitude = location.longitude
@@ -126,10 +130,11 @@ elif selected == "Regression":
                 longitude = st.session_state.longitude
 
                 #predict the house value
-                #prediction = models.get_house_value_reg(latitude, longitude, median_income, total_rooms)
-                prediction = 5
-                st.write(f"Estimated House Value: {prediction}")
                 
+                prediction = models.get_house_value_reg(latitude, longitude, median_income, total_rooms)
+                prediction = 5  # This line overwrites the previous prediction value
+                st.write(f"Estimated House Value: {prediction}")
+
 
             else:
                 st.write("Die eingegebene Adresse liegt nicht in Kalifornien.")
