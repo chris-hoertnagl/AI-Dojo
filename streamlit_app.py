@@ -1,12 +1,10 @@
 import streamlit as st
 import pandas as pd
 import pydeck as pdk
-import models
 import folium
 import pickle
 import requests
 import gzip
-import streamlit.components.v1 as com
 import streamlit_folium as stf
 
 from streamlit_folium import folium_static
@@ -32,7 +30,7 @@ if selected == "Home":
     and the distance to the nearest city. The app preprocesses the input data by combining some of the features and adding new features, such as the distance to the nearest city.
     """)
     st.subheader("Check out the colab workbook 🔗")
-    st.markdown("**:book: [GitHub repository](https://github.com/)** | :heart: **Other Options:** [@ideas](https://)")
+    st.markdown("**:book: [GitHub repository](https://github.com/)**")
 
 elif selected == "Data Set":
     df = pd.read_csv('https://raw.githubusercontent.com/Seb1703/AI-Dojo/main/Basics/sample_data/housing_new.csv')
@@ -50,27 +48,12 @@ elif selected == "Classification":
     #Enter address
     address = st.text_input("Enter an address in California:")
     
-
     #Button to predict house value
     if st.button("Predict House Value"):
+        
         #Geopy to change location into latitude, longitude
         geolocator = Nominatim(user_agent="streamlit_app.py")
         location = geolocator.geocode(address, addressdetails=True)
-
-        # Lade das Modell
-        #github_url = 'https://raw.githubusercontent.com/janmeuser/AI-Dojo/main/knn_classifier_model.pkl'
-
-        # Herunterladen der Raw-Datei von GitHub und direktes Laden mit pickle
-        #response = requests.get(github_url)
-
-        # Überprüfen, ob der Download erfolgreich war
-        #if response.status_code == 200:
-         #   file_like_object = response.content
-        #  geladenes_modell = pickle.loads(response.content)
-            
-        # Laden des KNN Classifier-Modells aus der Pickle-Datei
-        #with gzip.open('/workspaces/AI-Dojo/class_model.pkl.gz', 'wb') as class_model_gzip:
-        #   pickle.dump(class_knn, class_model_gzip)
             
         with gzip.open('/workspaces/AI-Dojo/class_model.pkl.gz', 'rb') as f:
             class_knn = pickle.load(f)
@@ -81,9 +64,8 @@ elif selected == "Classification":
             state = location.raw.get("address", {}).get("state")
 
             if state == "California":
-            #house_value = models.get_house_value_class(float(latitude), float(longitude))
                 house_value = class_knn.predict(pd.DataFrame([{"longitude": longitude, "latitude": latitude}]))
-                st.write(f"Geschätzter House Value in California: {house_value}")
+                st.write(f"Geschätzter House Value in California: {house_value[0]}")
             else:
                 st.write("Die Adresse liegt nicht in Kalifornien.")
                     
@@ -113,7 +95,6 @@ elif selected == "Regression":
         with gzip.open('/workspaces/AI-Dojo/reg_model.pkl.gz', 'rb') as f:
             reg_rfr = pickle.load(f)
 
-        
         if location:
             latitude = location.latitude
             longitude = location.longitude
@@ -130,11 +111,8 @@ elif selected == "Regression":
                 longitude = st.session_state.longitude
 
                 #predict the house value
-                
-                prediction = models.get_house_value_reg(latitude, longitude, median_income, total_rooms)
-                prediction = 5  # This line overwrites the previous prediction value
-                st.write(f"Estimated House Value: {prediction}")
-
+                prediction = reg_rfr.predict(pd.DataFrame([{"longitude": longitude, "latitude": latitude, "median_income": median_income, "total_rooms": total_rooms}]))
+                st.write(f"Estimated House Value: {prediction[0]}" "$")
 
             else:
                 st.write("Die eingegebene Adresse liegt nicht in Kalifornien.")
