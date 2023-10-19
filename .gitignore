@@ -1,6 +1,4 @@
-class_model.pkl.gz
-reg_model.pkl.gz
-
+.hiddenData/
 
 # Hugging Face Cache
 /LLM/cache/*
