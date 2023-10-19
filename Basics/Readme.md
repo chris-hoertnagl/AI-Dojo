@@ -9,8 +9,7 @@ We have created a Jupyter Notebook, named `Ai_Workshop2.ipynb`, that takes you t
 Our analysis and modeling process involved the development of both a classifier and a regression model. These models were constructed using state-of-the-art data science techniques to ensure accurate predictions and insights.
 
 ## Streamlit App Deployment
-To make our models accessible and user-friendly, we have deployed them in a Streamlit web application. You can interact with the deployed models by visiting the following link: [Golden Gate Estate App](AppLink).
-
+To make our models accessible you need to run the file "models.py" and afterwards the file "streamlit_app.py".
 This repository is designed to provide a transparent and replicable view of our data science project for the Golden Gate Estate. We hope it serves as a valuable resource for anyone interested in data analysis, modeling, or the CRISP-DM process.
 
 Happy exploring!
