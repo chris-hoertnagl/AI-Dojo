@@ -14,3 +14,4 @@ To make our models accessible and user-friendly, we have deployed them in a Stre
 This repository is designed to provide a transparent and replicable view of our data science project for the Golden Gate Estate. We hope it serves as a valuable resource for anyone interested in data analysis, modeling, or the CRISP-DM process.
 
 Happy exploring!
+test
