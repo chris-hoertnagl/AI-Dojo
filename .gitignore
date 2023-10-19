@@ -1,5 +1,3 @@
-class_model.pkl.gz
-
 # Hugging Face Cache
 /LLM/cache/*
 
