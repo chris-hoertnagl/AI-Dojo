@@ -7,9 +7,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.ensemble import RandomForestRegressor
 
 #Loading data
-#!wget https://raw.githubusercontent.com/Seb1703/AI-Dojo/main/Basics/sample_data/housing_new.csv
-#!mv housing_new.csv /content/sample_data/
-df = pd.read_csv("https://raw.githubusercontent.com/Seb1703/AI-Dojo/main/Basics/sample_data/housing_new.csv")
+df = pd.read_csv("Basics/sample_data/housing_new.csv")
 
 #Cleaning data
 x = df["total_rooms"].mean()/df["total_bedrooms"].mean()
@@ -70,8 +68,8 @@ def get_house_value_reg(lat, long, inc, rooms):
 
 
 # 
-with gzip.open('class_model.pkl.gz', 'wb') as class_model_gzip:
+with gzip.open('Basics/models/class_model.pkl.gz', 'wb') as class_model_gzip:
     pickle.dump(class_knn, class_model_gzip)
 
-with gzip.open('reg_model.pkl.gz', 'wb') as reg_model_gzip:
+with gzip.open('Basics/models/reg_model.pkl.gz', 'wb') as reg_model_gzip:
     pickle.dump(reg_rfr, reg_model_gzip)
