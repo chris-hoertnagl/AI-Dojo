@@ -3,4 +3,8 @@ pandas
 scikit-learn
 seaborn
 matplotlib
-geopandas
+geopandas  
+streamlit
+pydeck
+folium 
+requests
