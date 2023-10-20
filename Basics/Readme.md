@@ -15,23 +15,48 @@ To open and work with the Jupyter Notebook, follow these steps:
 
 **Step 3:** If you don't already have Jupyter Notebook installed, you can install it using pip by running this command in VSC's integrated terminal:
 
-```
+```bash
 pip install notebook
 ```
 
-**Step 4:** After installing Jupyter Notebook, you can start it by running the following command in VSC's integrated terminal:
+**Step 4:** Install all the necessary packages with:
 
-```
-jupyter notebook
+```bash
+pip install pandas numpy matplotlib scikit-learn seaborn streamlit geopandas pydeck folium requests
 ```
 
-**Step 5:** Your web browser will open, and you will see an overview of the files in the project directory. Click on `Ai_Workshop2.ipynb` to open and edit the Jupyter Notebook.
+These commands will install the following packages:
+
+- `pandas`: Data manipulation and analysis library.
+- `numpy`: Numerical computing library for handling arrays and matrices.
+- `matplotlib`: Data visualization library for creating charts and plots.
+- `scikit-learn`: A machine learning library for building and evaluating models.
+- `seaborn`: A data visualization library based on Matplotlib.
+- `streamlit`: A tool for creating web apps for machine learning and data science.
+- `geopandas`: For working with geospatial data.
+- `pydeck`: A high-level library for creating 3D maps and data visualizations.
+- `folium`: For creating interactive maps.
+- `requests`: For making HTTP requests.
+- `gzip`: For working with compressed files.
+
+Make sure to execute this `pip install` command before running the code to ensure you have all the necessary dependencies.
 
 ## Models Built
 Our analysis and modeling process involved the development of both a classifier and a regression model. These models were constructed using state-of-the-art data science techniques to ensure accurate predictions and insights.
 
 ## Streamlit App Deployment
-To make our models accessible, you need to run the file "models.py" and afterwards the file "streamlit_app.py".
+
+To make our models accessible via the Streamlit app, follow these steps:
+
+**Step 1 - Run the Jupyter Notebook**: First, run the complete Jupyter Notebook (`Ai_Workshop2.ipynb`) locally. This notebook contains the data analysis and modeling steps. Running the notebook will generate two pickle files in the local folder "models."
+
+**Step 2 - Run the Streamlit App**: After successfully running the Jupyter Notebook, you can proceed to run the Streamlit app. Open your terminal and navigate to the project directory containing `streamlit_app.py`. Run the following command:
+
+```bash
+streamlit run streamlit_app.py
+```
+
+This command will start the Streamlit app and make the models accessible via the web interface. It's essential to run the Jupyter Notebook first to ensure the required model files are available for the Streamlit app.
 
 This repository is designed to provide a transparent and replicable view of our data science project for the Golden Gate Estate. We hope it serves as a valuable resource for anyone interested in data analysis, modeling, or the CRISP-DM process.
 
