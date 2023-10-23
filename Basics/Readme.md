@@ -41,7 +41,7 @@ These commands will install the following packages:
 
 Make sure to execute this `pip install` command before running the code to ensure you have all the necessary dependencies.
 
-**Step 5** Open Jupyter Notebook:
+**Step 5:** Open Jupyter Notebook:
 ```bash
 jupyter notebook
 ```
