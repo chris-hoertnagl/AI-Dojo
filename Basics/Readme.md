@@ -48,7 +48,7 @@ Our analysis and modeling process involved the development of both a classifier 
 
 To make our models accessible via the Streamlit app, follow these steps:
 
-**Step 1 - Run the Jupyter Notebook**: First, run the complete Jupyter Notebook (`Ai_Workshop2.ipynb`) locally. This notebook contains the data analysis and modeling steps. Running the notebook will generate two pickle files in the local folder "models."
+**Step 1 - Run the Jupyter Notebook**: First, run the complete Jupyter Notebook (`Ai_Workshop.ipynb`) locally. This notebook contains the data analysis and modeling steps. Running the notebook will generate two pickle files in the local folder "models."
 
 **Step 2 - Run the Streamlit App**: After successfully running the Jupyter Notebook, you can proceed to run the Streamlit app. Open your terminal and navigate to the project directory containing `streamlit_app.py`. Run the following command:
 
