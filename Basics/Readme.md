@@ -41,6 +41,12 @@ These commands will install the following packages:
 
 Make sure to execute this `pip install` command before running the code to ensure you have all the necessary dependencies.
 
+**Step 5** Open Jupyter Notebook:
+```bash
+jupyter notebook
+```
+A browser tab will open where you can choose the notebook file.
+
 ## Models Built
 Our analysis and modeling process involved the development of both a classifier and a regression model. These models were constructed using state-of-the-art data science techniques to ensure accurate predictions and insights.
 
