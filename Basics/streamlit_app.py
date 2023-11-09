@@ -33,7 +33,7 @@ if selected == "Home":
     st.markdown("**:book: [GitHub repository](https://github.com/)**")
 
 elif selected == "Data Set":
-    df = pd.read_csv('https://raw.githubusercontent.com/Seb1703/AI-Dojo/main/Basics/sample_data/housing_new.csv')
+    df = pd.read_csv('Basics/sample_data/housing_new.csv')
     st.write("The Data Set as a table. ")
     st.markdown("📉[Data Set from kaggle](https://www.kaggle.com/datasets/camnugent/california-housing-prices/data)")
     st.table(df.head(41))
@@ -55,7 +55,7 @@ elif selected == "Classification":
         geolocator = Nominatim(user_agent="streamlit_app.py")
         location = geolocator.geocode(address, addressdetails=True)
             
-        with gzip.open('/workspaces/AI-Dojo/class_model.pkl.gz', 'rb') as f:
+        with gzip.open('Basics/models/class_model.pkl.gz', 'rb') as f:
             class_knn = pickle.load(f)
                     
         if location:
@@ -92,7 +92,7 @@ elif selected == "Regression":
         geolocator = Nominatim(user_agent="streamlit_app.py")
         location = geolocator.geocode(address, addressdetails=True)
             
-        with gzip.open('/workspaces/AI-Dojo/reg_model.pkl.gz', 'rb') as f:
+        with gzip.open('Basics/models/reg_model.pkl.gz', 'rb') as f:
             reg_rfr = pickle.load(f)
 
         if location:
