@@ -1,3 +1,6 @@
+# Custom
+secrets.txt
+
 # Hugging Face Cache
 /LLM/cache/*
 
