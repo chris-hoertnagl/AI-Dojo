@@ -41,12 +41,6 @@ class ModelArguments:
             "help": "Path to pretrained model or model identifier from huggingface.co/models"
         }
     )
-    chat_template_format: Optional[str] = field(
-        default="none",
-        metadata={
-            "help": "chatml|zephyr|none. Pass `none` if the dataset is already formatted with the chat template."
-        },
-    )
     lora_alpha: Optional[int] = field(default=16)
     lora_dropout: Optional[float] = field(default=0.1)
     lora_r: Optional[int] = field(default=64)
@@ -92,10 +86,6 @@ class ModelArguments:
         default=False,
         metadata={"help": "Gradient Checkpointing param. Refer the related docs"},
     )
-    use_unsloth: Optional[bool] = field(
-        default=False,
-        metadata={"help": "Enables UnSloth for training."},
-    )
     use_loftq: Optional[bool] = field(
         default=False,
         metadata={"help": "Enables LoftQ init for the LoRA adapters when using QLoRA."},
@@ -114,9 +104,9 @@ class ModelArguments:
 
 @dataclass
 class DataTrainingArguments:
-    dataset_name: Optional[str] = field(
-        default="timdettmers/openassistant-guanaco",
-        metadata={"help": "The preference dataset to use."},
+    data_file_path: Optional[str] = field(
+        default=None,
+        metadata={"help": "Filepath to jsonl dataset."},
     )
     packing: Optional[bool] = field(
         default=False,
@@ -138,10 +128,6 @@ class DataTrainingArguments:
             "help": "If True, tokenizers adds special tokens to each sample being packed."
         },
     )
-    splits: Optional[str] = field(
-        default="train,test",
-        metadata={"help": "Comma separate list of the splits to use from the dataset."},
-    )
 
 
 def main(model_args, data_args, training_args):
@@ -155,9 +141,6 @@ def main(model_args, data_args, training_args):
 
     # gradient ckpt
     model.config.use_cache = not training_args.gradient_checkpointing
-    training_args.gradient_checkpointing = (
-        training_args.gradient_checkpointing and not model_args.use_unsloth
-    )
     if training_args.gradient_checkpointing:
         training_args.gradient_checkpointing_kwargs = {
             "use_reentrant": model_args.use_reentrant
@@ -166,9 +149,7 @@ def main(model_args, data_args, training_args):
     # datasets
     train_dataset, eval_dataset = create_datasets(
         tokenizer,
-        data_args,
-        training_args,
-        apply_chat_template=model_args.chat_template_format != "none",
+        data_args
     )
 
     # trainer
