@@ -1,0 +1,15 @@
+services:
+  llm:
+    container_name: llm
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    volumes:
+      - ./:/llm
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [ gpu ]

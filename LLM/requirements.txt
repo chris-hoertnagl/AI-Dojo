@@ -7,4 +7,4 @@ accelerate
 deepspeed
 torch
 ollama
-# flash-attn --no-build-isolation
+huggingface_hub
