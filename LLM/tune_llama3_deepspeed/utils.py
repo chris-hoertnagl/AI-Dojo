@@ -13,7 +13,6 @@ current_mse = float("inf")
 
 def create_datasets(tokenizer, data_args):
     dataset = load_dataset('json', data_files=[data_args.data_file_path])
-    # dataset = Dataset.from_dict(dataset['train'][:40])
     dataset = dataset['train'] 
     dataset
     

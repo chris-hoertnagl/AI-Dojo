@@ -1,7 +1,7 @@
 accelerate launch --config_file "deepspeed_config_z3_qlora.yaml"  train.py \
 --seed 42 \
---data_file_path "/home/ubuntu/dev/Bachelor-Thesis/QLoRA_training/llama3_dataset.jsonl" \
---model_name_or_path "/home/ubuntu/dev/AI-Dojo/LLM/models/meta-llama/Meta-Llama-3-8B-Instruct" \
+--data_file_path "<PATH TO DATASET>/dataset.jsonl" \
+--model_name_or_path "<PATH TO BASE MODEL>" \
 --max_seq_len 3600 \
 --num_train_epochs 1 \
 --logging_steps 5 \
@@ -10,7 +10,7 @@ accelerate launch --config_file "deepspeed_config_z3_qlora.yaml"  train.py \
 --bf16 True \
 --learning_rate 2.0e-05 \
 --lr_scheduler_type "cosine" \
---output_dir "/home/ubuntu/dev/Bachelor-Thesis/QLoRA_training/model/ds" \
+--output_dir "<PATH TO TRAINING OUTPUT>" \
 --per_device_train_batch_size 2 \
 --per_device_eval_batch_size 2 \
 --gradient_accumulation_steps 2 \
