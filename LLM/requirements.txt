@@ -1,0 +1,9 @@
+trl 
+peft 
+transformers 
+datasets 
+bitsandbytes
+accelerate
+deepspeed
+torch
+# flash-attn --no-build-isolation

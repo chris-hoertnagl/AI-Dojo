@@ -8,7 +8,6 @@ accelerate launch --config_file "deepspeed_config_z3_qlora.yaml"  train.py \
 --log_level "info" \
 --logging_strategy "steps" \
 --bf16 True \
---packing True \
 --learning_rate 2.0e-05 \
 --lr_scheduler_type "cosine" \
 --output_dir "/home/ubuntu/dev/Bachelor-Thesis/QLoRA_training/model/ds" \

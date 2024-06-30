@@ -1,25 +1,8 @@
-# coding=utf-8
-# Copyright 2024 Sourab Mangrulkar. All rights reserved.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
+# Inspired by https://github.com/huggingface/peft/tree/main/examples
 
-from enum import Enum
-import gc
-import os
 import torch
-from datasets import DatasetDict, load_dataset, load_from_disk
-from datasets.builder import DatasetGenerationError
-from peft import LoraConfig, replace_lora_weights_loftq
+from datasets import load_dataset
+from peft import LoraConfig
 from transformers import (
     AutoModelForCausalLM,
     AutoTokenizer,
@@ -115,54 +98,3 @@ def error_report(x, y):
         f"Mean absolute error: {mae:>8.5f}\n"
         f"Mean squared error:  {mse:>8.5f}"
     )
-
-
-def loftq_init(model, tokenizer, train_dataset, max_seq_length, args):
-    if args.use_loftq_callback:
-        compute_dtype = getattr(torch, args.bnb_4bit_compute_dtype)
-        base_model = AutoModelForCausalLM.from_pretrained(args.model_name_or_path, torch_dtype=compute_dtype)
-        base_model.resize_token_embeddings(len(tokenizer), pad_to_multiple_of=8)
-        random_input_ids = torch.randint(0, len(train_dataset), size=(1,)).numpy().tolist()
-        random_inputs = [train_dataset[i]['content'] for i in random_input_ids]
-        random_inputs = tokenizer(random_inputs, return_tensors="pt", padding=True, truncation="max_length", max_length=max_seq_length)
-        logits_base = base_model(**random_inputs).logits
-        del base_model
-        gc.collect()
-        
-        def loftq_callback(model, module_name):
-            """Callable to replace weights with LoFTQ if the mse is lower than the current best one."""
-            global current_mse
-            logits = model(**random_inputs).logits
-            mse = get_mse(logits_base, logits)
-            if mse < current_mse:
-                current_mse = mse
-                print(f"MSE improved for module {module_name}")
-                return True
-            print(f"MSE did not improve for module {module_name}")
-            return False
-        
-        replace_lora_weights_loftq(model, callback=loftq_callback)
-        logits_loftq_callback = model(**random_inputs).logits
-        error_report(logits_base, logits_loftq_callback)
-    else:
-        replace_lora_weights_loftq(model)
-    
-
-def get_module_class_from_name(module, name):
-    """
-    Gets a class from a module by its name.
-
-    Args:
-        module (`torch.nn.Module`): The module to get the class from.
-        name (`str`): The name of the class.
-    """
-    modules_children = list(module.children())
-    if module.__class__.__name__ == name:
-        return module.__class__
-    elif len(modules_children) == 0:
-        return
-    else:
-        for child_module in modules_children:
-            module_class = get_module_class_from_name(child_module, name)
-            if module_class is not None:
-                return module_class
