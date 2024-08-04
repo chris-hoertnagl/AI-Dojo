@@ -9,3 +9,4 @@ torch
 lightning
 ollama
 huggingface_hub
+ipykernel

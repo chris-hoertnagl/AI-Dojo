@@ -52,8 +52,8 @@ def get_model_tokenizer(model_path: str):
 if __name__ == "__main__":
     # TODO fix these 2:
     MODEL_PATH = "meta-llama/Meta-Llama-3.1-8B-Instruct"
-    OUTPUT_PATH = ""
-    DATA_PATH = "./data/train.jsonl"
+    OUTPUT_PATH = "/llm/model/test"
+    DATA_PATH = "/llm/data/train.jsonl"
     TEXT_COL = "text"
     dataset = load_dataset('json', data_files=[DATA_PATH])['train']
     config = {

@@ -5,8 +5,18 @@ In this tutorial we will learn how to teach llama3.1 that its name is <INSERT YO
 ## Prerequsites
 - Know how to use Python, Notebooks, Docker & VS Code
 - Install [ollama](https://ollama.com/) on your local machine
+
+## Setup
 - Go to `Dockerfile` and exchange `<YOUR HF TOKEN>` with your huggingface token
+- Run `docker-compose up --build -d`
+- Attach VS Code to the container
+- Open `setup.ipynb` and start downloading the model
 - Go to `/data/train.jsonl` or `/data/train.json` and replace ``<NAME>`` with your name
+
+## To start training run
+``` bash
+accelerate launch --config_file "deepspeed_config_z3_qlora.yaml"  tune_sft.py
+```
 
 
 
