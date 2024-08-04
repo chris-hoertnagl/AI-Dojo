@@ -5,7 +5,10 @@ In this tutorial we will learn how to teach llama3.1 that its name is <INSERT YO
 ## Prerequsites
 - Know how to use Python, Notebooks, Docker & VS Code
 - Install [ollama](https://ollama.com/) on your local machine
+- Go to `Dockerfile` and exchange `<YOUR HF TOKEN>` with your huggingface token
 - Go to `/data/train.jsonl` or `/data/train.json` and replace ``<NAME>`` with your name
+
+
 
 ## Setup Ollama Conversion
 

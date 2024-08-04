@@ -13,12 +13,11 @@ RUN apt-get install -y git
 RUN pip3 install --upgrade pip
 
 COPY ./requirements.txt ./requirements.txt
-RUN pwd
-RUN ls
 RUN pip3 install -r ./requirements.txt
 RUN pip3 install flash-attn --no-build-isolation
 
 ENV HF_HOME=/llm/cache
+ENV HF_TOKEN="<YOUR HF TOKEN>"
 # set working directory
 WORKDIR /llm
 

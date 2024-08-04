@@ -68,6 +68,7 @@ class LlamaModelPLModule(L.LightningModule):
             device_map="auto",
             torch_dtype="float16",
             quantization_config=self.bnb_config, 
+            attn_implementation="flash_attention_2"
         )
 
     def training_step(self, batch, batch_idx):

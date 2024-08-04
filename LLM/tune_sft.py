@@ -28,6 +28,7 @@ def get_model_tokenizer(model_path: str):
         model_path,
         device_map="auto",
         torch_dtype="float16",
+        attn_implementation="flash_attention_2",
         quantization_config=bnb_config, 
     )
     lora_config = LoraConfig(
