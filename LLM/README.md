@@ -1,3 +1,12 @@
+# LLM fine-tuning
+
+In this tutorial we will learn how to teach llama3.1 that its name is <INSERT YOUR NAME HERE> through fine-tuning. We will use QLoRA to make the fine-tuning possible on a consumer GPU such as a Nvidia 3080. In addition we will convert it to a format so that it can be inferenced locally with a CPU.
+
+## Prerequsites
+- Know how to use Python, Notebooks, Docker & VS Code
+- Install [ollama](https://ollama.com/) on your local machine
+- Go to `/data/train.jsonl` and replace ``<NAME>`` with your name
+
 ## Setup Ollama Conversion
 
 NOTE: Obviously adjust models paths accordingly and then run the follwing commands to convert to an ollama usable model:
