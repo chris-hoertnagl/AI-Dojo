@@ -2,6 +2,7 @@
 secrets.txt
 LLM/model
 LLM/data
+LLM/llama.cpp
 DL/data
 # Hugging Face Cache
 /LLM/cache/*

@@ -4,6 +4,7 @@ import bitsandbytes as bnb
 from peft import LoraConfig, prepare_model_for_kbit_training, get_peft_model
 from trl import SFTTrainer
 
+DTYPE = "bfloat16"
 
 def find_all_linear_names(model):
     cls = bnb.nn.Linear4bit
@@ -21,13 +22,13 @@ def get_model_tokenizer(model_path: str):
         load_in_4bit=True,
         bnb_4bit_use_double_quant=False,
         bnb_4bit_quant_type="nf4",
-        bnb_4bit_compute_dtype="float16",
+        bnb_4bit_compute_dtype=DTYPE,
     )
 
     model = AutoModelForCausalLM.from_pretrained(
         model_path,
         device_map="auto",
-        torch_dtype="float16",
+        torch_dtype=DTYPE,
         attn_implementation="flash_attention_2",
         quantization_config=bnb_config, 
     )
@@ -58,9 +59,9 @@ if __name__ == "__main__":
     dataset = load_dataset('json', data_files=[DATA_PATH])['train']
     config = {
         "epochs": 1,
-        "lr": 1e-4,
+        "lr": 0.00001,
         "max_length": 128,
-        "batch_size": 2,
+        "batch_size": 1,
         "accumulate_grad_batches": 4,
         "precision": "16-mixed",
         "gradient_clip_val": 1.0,
@@ -71,6 +72,8 @@ if __name__ == "__main__":
         sample[TEXT_COL] = tokenizer.apply_chat_template(conversation=sample['messages'], tokenize=False)
         return sample
     train_dataset = dataset.map(make_prompt)
+    print(train_dataset)
+    print(train_dataset["text"][0])
 
     training_arguments = TrainingArguments(
         output_dir=OUTPUT_PATH,                    # directory to save and repository id
@@ -78,31 +81,17 @@ if __name__ == "__main__":
         per_device_train_batch_size=config["batch_size"],            # batch size per device during training
         gradient_accumulation_steps=config["accumulate_grad_batches"],            # number of steps before performing a backward/update pass
         gradient_checkpointing=True,              # use gradient checkpointing to save memory
-        optim="paged_adamw_32bit",
         logging_steps=1,                         
-        learning_rate=config["lr"],                       # learning rate, based on QLoRA paper
-        weight_decay=0.001,
-        fp16=True,
-        bf16=False,
-        max_grad_norm=0.3,                        # max gradient norm based on QLoRA paper
-        max_steps=-1,
-        warmup_ratio=0.03,                        # warmup ratio based on QLoRA paper
-        group_by_length=False,
-        lr_scheduler_type="cosine",               # use cosine learning rate scheduler
-        report_to=None,                  # report metrics to w&b
+        learning_rate=2.0e-04,
+        bf16=True
     )
     trainer = SFTTrainer(
         model=model,
-        args=training_arguments,
-        train_dataset=dataset,
-        dataset_text_field=TEXT_COL,
         tokenizer=tokenizer,
+        args=training_arguments,
+        train_dataset=train_dataset,
+        dataset_text_field=TEXT_COL,
         max_seq_length=config["max_length"],
-        packing=False,
-        dataset_kwargs={
-        "add_special_tokens": False,
-        "append_concat_token": False,
-        }
     )
     trainer.train()
 
