@@ -1,6 +1,7 @@
 # Custom
 secrets.txt
 LLM/model
+LLM/data
 DL/data
 # Hugging Face Cache
 /LLM/cache/*
