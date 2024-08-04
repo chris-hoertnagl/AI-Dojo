@@ -6,5 +6,6 @@ bitsandbytes
 accelerate
 deepspeed
 torch
+lightning
 ollama
 huggingface_hub
