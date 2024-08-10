@@ -15,7 +15,8 @@ WSL2
 5. Install docker compose https://docs.docker.com/compose/install/linux/
 	sudo apt-get install docker-compose
 6. Install Cuda according to https://developer.nvidia.com/cuda-12-4-0-download-archive?target_os=Linux&target_arch=x86_64&Distribution=WSL-Ubuntu&target_version=2.0&target_type=deb_local
-7. Set CUDA Home https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html#post-installation-actions
+7. Set CUDA Home https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html#post-installation-actions:
+``export PATH=/usr/local/cuda-12.4/bin${PATH:+:${PATH}}`` and export ``LD_LIBRARY_PATH=/usr/local/cuda-12.4/lib64${LD_LIBRARY_PATH:+:{LD_LIBRARY_PATH}}``
 8. Test if it worked "nvidia-smi" and "nvcc -V"
 9. Install Container Toolkit https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/1.15.0/install-guide.html
 10. Pull and run any Cuda container "docker run --rm --gpus all nvidia/cuda:12.5.0-devel-ubuntu22.04 sleep infinity"
