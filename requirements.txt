@@ -1,0 +1,27 @@
+# Deep Learning
+torch
+lightning
+deepspeed
+transformers 
+datasets 
+bitsandbytes
+peft 
+accelerate
+# Infernence
+ollama
+# App
+streamlit
+streamlit_option_menu
+streamlit_lottie
+langchain
+langchain-community
+# Document Handling
+pypdf
+pdfminer.six
+unstructured[all-docs]
+unstructured[local-inference]
+faiss-gpu #use faises-cpu if you do not have a GPU
+# Other
+huggingface_hub
+ipykernel
+pillow
