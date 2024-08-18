@@ -22,7 +22,7 @@ model_config_json = {
 }
 
 #Set the page config
-st.set_page_config("VistaAI",layout="wide",page_icon=":vhs:")
+st.set_page_config("AIChatBot",layout="wide",page_icon=":vhs:")
 
 @st.cache_resource
 def load_model(model_config):

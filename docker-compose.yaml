@@ -1,0 +1,18 @@
+services:
+  dev:
+    container_name: dev
+    environment:
+      HF_HOME: ${HF_HOME}
+      HF_TOKEN: ${HF_TOKEN}
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    volumes:
+      - ./:/ai_dev
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [ gpu ]

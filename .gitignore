@@ -4,6 +4,7 @@ LLM/model
 LLM/data
 LLM/llama.cpp
 LMM/pdfs
+LMM/wl_data
 DL/data
 # Hugging Face Cache
 /LLM/cache/*
