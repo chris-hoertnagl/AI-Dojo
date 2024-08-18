@@ -7,7 +7,7 @@ LMM/pdfs
 LMM/wl_data
 DL/data
 # Hugging Face Cache
-/LLM/cache/*
+cache/*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
