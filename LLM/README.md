@@ -1,5 +1,10 @@
 # LLM fine-tuning
 
+# An easy first experiment
+In the folder beginner_example you can find a dataset and colab notebook to run a first simple LLM fine-tuning experiment. No setup required, except for knowing how to use [google colab](https://colab.google/).
+
+# Improving the setup
+
 In this tutorial we will learn how to teach llama3.1 that its name is <INSERT YOUR NAME HERE> through fine-tuning. We will use QLoRA to make the fine-tuning possible on a consumer GPU such as a Nvidia 3080. In addition we will convert it to a format so that it can be inferenced locally with a CPU.
 
 ## CURRENT STATUS:
