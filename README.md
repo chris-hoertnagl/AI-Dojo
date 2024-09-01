@@ -1,8 +1,21 @@
 # AI-Dojo
 
-## CURRENT STATUS:
-- Trying to clean code up by building one tuning with transformers & sft and one with lightning. Pipeline should work with sft for now. Trying to integrate all installs to Docker.
-- Updating streamlit app to work for 3 use cases (text chat, file&web chat, image&automation chat)
+The purpose of this repository is to provide tangible examples for advanced AI/ML concepts. This is not a replacement for proper education nor is it complete. 
+A lot of the code in here is still work in progress...
+Current concepts available:
+
+- Deep Learning (DL)
+	- A notebook that covers the basics to get familiar with the concept
+- Large Language Models (LLM)
+	- A notebook for the basics of Natural Language Processing needed for LLMs
+	- 2 examples to demonstrate how LLMs can be fine-tuned to gain new knowledge / skills
+	- A example to show the concept of RAG and why it is useful
+- Large Multimodal Models (LMM)
+	- some first model usage examples
+	- this is still largely work in progress (Updating streamlit app to work for 3 use cases (text chat, file&web chat, image&automation chat))
+- Reinforcement Learning (RL)
+	- An implementation of my favourite algorithm MCTS demonstrating its capability to play snake
+
 
 ## Prerequsites
 - Know how to use Python, Notebooks, Docker & VS Code
